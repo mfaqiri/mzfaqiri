@@ -1,0 +1,99 @@
+package main
+
+templ page_header(page string) {
+  <head>
+    <title>mzfaqiri {page}</title>
+    <script src="./assets/js/htmx.min.js"></script>
+  </head>  
+  <body>
+    <div>
+      <ul class={ navbar() }>
+        <li class={ navitemholder() }><a href="/home" hx-trigger="click" class={ navitems() }>Home</a></li>
+        <li class={ navitemholder() }><a href="/resume" hx-trigger="click" class={ navitems() }>Resume</a></li>
+        <li class={ navitemholder() }><a href="/technology" hx-trigger="click" class={ navitems() }>Technology</a></li>
+        <li class={ navitemholder() }><a href="/calendar" hx-trigger="click" class={ navitems() }>Calendar</a></li>
+        <li class={ navitemholder() }><a href="/about-me" hx-trigger="click" class={ navitems() }>About Me</a></li>
+      </ul>
+    </div>
+  </body>
+}
+
+templ home_page() {
+  @page_header("home page")
+  <body>
+    <h1>Home Page</h1>
+  </body>
+}
+
+templ resume_page() {
+  @page_header("resume page")
+  <body>
+    <div class={ center() }>
+      <iframe src="https://drive.google.com/file/d/1chGYMl_Qx5DQNSaFTlR_J4F2G7I_wap0/preview" 
+      width="80%" 
+      height="80%" 
+      allow="autoplay">
+      </iframe>
+    </div>
+  </body>
+}
+
+templ technology_page() {
+  @page_header("technology page")
+  <body>
+    <div>Technology</div>
+  </body>
+}
+
+templ calendar_page() {
+  @page_header("calendar page")
+  <body>
+    <div>
+      <iframe src="https://calendar.google.com/calendar/embed?src=b759fc5c1871dee2c1d50f1ae3a198a12f744b0a2b2141daf1ccd4ba2126140b%40group.calendar.google.com&ctz=UTC" 
+              style="border: 0" 
+              width="100%" 
+              height="80%" 
+              frameborder="0" 
+              scrolling="no">
+      </iframe>
+    </div>
+  </body>
+}
+
+templ about_me_page() {
+  @page_header("about me page")
+  <body id="about-me">
+    <div>About Me</div>
+  </body>
+}
+
+css center() {
+  max-width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+css navbar() {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #4e3b66;
+}
+
+css navitemholder() {
+  float: left;
+}
+
+css navitems() {
+  display: block;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+css lightgreen() {
+  background-color: lightgreen;
+}
