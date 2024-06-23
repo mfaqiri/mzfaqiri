@@ -1,6 +1,8 @@
 package main
 
 import (
+  "fmt"
+  "os"
 	"log"
 	"net/http"
 
@@ -21,6 +23,13 @@ func main() {
   http.Handle("/calendar", templ.Handler(calendar_page()))
   http.Handle("/about-me", templ.Handler(about_me_page()))
 
-  log.Fatal(http.ListenAndServe(":8000", nil))
+  port := ":" + os.Getenv("PORT")
+
+  if port == ":" {
+    port += "8080"
+  }
+
+  log.Println(fmt.Sprintf("Serving on localhost%s", port))
+  log.Fatal(http.ListenAndServe(port, nil))
 }
 

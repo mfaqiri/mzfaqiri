@@ -3,16 +3,15 @@ package main
 templ page_header(page string) {
   <head>
     <title>mzfaqiri {page}</title>
-    <script src="./assets/js/htmx.min.js"></script>
   </head>  
   <body>
     <div>
       <ul class={ navbar() }>
-        <li class={ navitemholder() }><a href="/home" hx-trigger="click" class={ navitems() }>Home</a></li>
-        <li class={ navitemholder() }><a href="/resume" hx-trigger="click" class={ navitems() }>Resume</a></li>
-        <li class={ navitemholder() }><a href="/technology" hx-trigger="click" class={ navitems() }>Technology</a></li>
-        <li class={ navitemholder() }><a href="/calendar" hx-trigger="click" class={ navitems() }>Calendar</a></li>
-        <li class={ navitemholder() }><a href="/about-me" hx-trigger="click" class={ navitems() }>About Me</a></li>
+        <li class={ navitemholder() }><a href="/home" class={ navitems() }>Home</a></li>
+        <li class={ navitemholder() }><a href="/resume" class={ navitems() }>Resume</a></li>
+        <li class={ navitemholder() }><a href="/technology" class={ navitems() }>Technology</a></li>
+        <li class={ navitemholder() }><a href="/calendar" class={ navitems() }>Calendar</a></li>
+        <li class={ navitemholder() }><a href="/about-me" class={ navitems() }>About Me</a></li>
       </ul>
     </div>
   </body>
