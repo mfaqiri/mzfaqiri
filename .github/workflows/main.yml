@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and export
+        uses: docker/build-push-action@v6
+        with:
+          tags: mzfaqiri:latest
+          outputs: type=docker,dest=/tmp/mzfaqiri.tar
+      -
+        name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mzfaqiri
+          path: /tmp/mzfaqiri.tar
+
+
+  linode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install the Linode CLI
+        uses: linode/action-linode-cli@v1
+        with:
+          token: ${{ secrets.LINODE_TOKEN }}
+          version: 5.35.0
