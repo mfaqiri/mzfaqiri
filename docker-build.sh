@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker buildx build . -t mzfaqiri
+docker buildx build . -t mzfaqiri/mzfaqiri-website
