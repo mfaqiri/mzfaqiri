@@ -30,6 +30,9 @@ func main() {
   }
 
   log.Println(fmt.Sprintf("Serving on localhost%s", port))
-  log.Fatal(http.ListenAndServe(port, nil))
+  log.Fatal(http.ListenAndServeTLS(port, 
+                                "https-certs/mzfaqiri.cert.pem",
+                                "https-certs/private.key.pem", 
+                                nil))
 }
 
