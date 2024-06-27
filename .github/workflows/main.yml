@@ -24,16 +24,6 @@ jobs:
       attestations: write
       id-token: write
     steps:
-      - name: Setup files
-        run: |
-          mkdir https-certs
-          echo "${{ secrets.HTTPS_CERT }}" | base64 --decode > https-certs/mzfaqiri.cert.pem
-          echo "${{ secrets.HTTPS_PRIVATE_KEY }}" | base64 --decode > https-certs/private.key.pem
-          ls
-          pwd
-      - name: Check out the repo
-        uses: actions/checkout@v4
-
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -45,6 +35,14 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: mzfaqiri/mzfaqiri-website
+      
+      - name: Setup files
+        run: |
+          mkdir https-certs
+          echo "${{ secrets.HTTPS_CERT }}" | base64 --decode > https-certs/mzfaqiri.cert.pem
+          echo "${{ secrets.HTTPS_PRIVATE_KEY }}" | base64 --decode > https-certs/private.key.pem
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
       - name: Build and push Docker image
         id: push
