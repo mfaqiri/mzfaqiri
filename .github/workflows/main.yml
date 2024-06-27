@@ -36,13 +36,15 @@ jobs:
         with:
           images: mzfaqiri/mzfaqiri-website
       
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+        
       - name: Setup files
         run: |
           mkdir https-certs
           echo "${{ secrets.HTTPS_CERT }}" | base64 --decode > https-certs/mzfaqiri.cert.pem
           echo "${{ secrets.HTTPS_PRIVATE_KEY }}" | base64 --decode > https-certs/private.key.pem
-      - name: Check out the repo
-        uses: actions/checkout@v4
 
       - name: Build and push Docker image
         id: push
