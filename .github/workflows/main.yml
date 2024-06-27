@@ -26,9 +26,9 @@ jobs:
     steps:
       - name: Setup files
         run: |
-          mkdir ./https-certs
-          echo "${{ secrets.HTTPS_CERT }}" | base64 --decode > ./https-certs/mzfaqiri.cert.pem
-          echo "${{ secrets.HTTPS_PRIVATE_KEY }}" | base64 --decode > ./https-certs/private.key.pem
+          mkdir /https-certs
+          echo "${{ secrets.HTTPS_CERT }}" | base64 --decode > /https-certs/mzfaqiri.cert.pem
+          echo "${{ secrets.HTTPS_PRIVATE_KEY }}" | base64 --decode > /https-certs/private.key.pem
           ls
       - name: Check out the repo
         uses: actions/checkout@v4
