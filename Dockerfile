@@ -2,7 +2,7 @@ FROM golang:1.22.4-bookworm
 
 WORKDIR /app
 
-
+COPY assets ./assets
 
 COPY https-certs ./https-certs
 

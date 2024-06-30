@@ -1,26 +1,58 @@
 package main
 
+import (
+  "fmt"
+)
+
+css navbar() {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #4e3b66;
+}
+
 templ page_header(page string) {
   <head>
     <title>mzfaqiri {page}</title>
+    <script src="/static/js/htmx.min.js"></script>
   </head>  
   <body>
     <div>
+      <style type="text/css">
+
+          li a {
+            float: left;
+            display: block;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+          }
+
+          li a:hover {
+            background-color: #906acc;
+          }
+      </style>
       <ul class={ navbar() }>
-        <li class={ navitemholder() }><a href="/home" class={ navitems() }>Home</a></li>
-        <li class={ navitemholder() }><a href="/resume" class={ navitems() }>Resume</a></li>
-        <li class={ navitemholder() }><a href="/technology" class={ navitems() }>Technology</a></li>
-        <li class={ navitemholder() }><a href="/calendar" class={ navitems() }>Calendar</a></li>
-        <li class={ navitemholder() }><a href="/about-me" class={ navitems() }>About Me</a></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/resume">Resume</a></li>
+        <li><a href="/technology">Technology</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/about-me">About Me</a></li>
       </ul>
     </div>
   </body>
 }
 
-templ home_page() {
+templ home_page(paragraph string) {
   @page_header("home page")
   <body>
     <h1>Home Page</h1>
+    <p>{ paragraph }</p>
+    <a href="https://github.com/mfaqiri"><img src="/static/images/github.svg" alt="GitHub" width="42" height="42"></img></a>
+    <a href="mailto:mzfaqiri@gmail.com"><img src="/static/images/email.svg" alt="Email" width="42" height="42"></img></a>
   </body>
 }
 
@@ -37,12 +69,98 @@ templ resume_page() {
   </body>
 }
 
-templ technology_page() {
+templ technology_page_dropdown(technologies []technology) {
   @page_header("technology page")
   <body>
-    <div>Technology</div>
+    <style type="text/css">
+      /* Style The Dropdown Button */
+      .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {background-color: #f1f1f1}
+
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+      }
+  </style>
+    <div class="dropdown">
+    <div class="dropbtn">Technologies</div>
+    <div class="dropdown-content">
+      for i, tech := range technologies {
+        <a
+          hx-get={ string(templ.URL(fmt.Sprintf("/technology/%d", i))) }
+          hx-trigger="click"
+          hx-target="#tech-summary"
+          hx-swap="outerHTML"
+        >
+        { tech.Name }
+        </a>
+        }
+    </div>
+    </div>
   </body>
 }
+
+templ technology_page_summary(tech technology) {
+  <div id="tech-summary">
+    <h1>{ tech.Name }</h1>
+    <p>{ tech.Summary }</p>
+    <style type="text/css">
+      ul {
+        list-style-type: outside;
+        list-style: square;
+      }
+    </style>
+    <ul>
+    for _, t := range tech.BulletPoints {
+      <li>{ t }</li>
+    }
+    </ul>
+  </div>
+}
+
+templ technology_page(technologies []technology, techInd int) {
+  @technology_page_dropdown(technologies)
+  @technology_page_summary(technologies[techInd])
+}
+
 
 templ calendar_page() {
   @page_header("calendar page")
@@ -72,27 +190,3 @@ css center() {
   margin-right: auto;
 }
 
-css navbar() {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #4e3b66;
-}
-
-css navitemholder() {
-  float: left;
-}
-
-css navitems() {
-  display: block;
-  color: white;
-  padding: 8px;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-css lightgreen() {
-  background-color: lightgreen;
-}
