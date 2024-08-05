@@ -1,9 +1,5 @@
 package main
 
-import (
-  "fmt"
-)
-
 
 templ page_header(page string) {
   <head>
@@ -20,16 +16,63 @@ templ page_header(page string) {
     <link rel="manifest" href="/static/images/site.webmanifest">
   </head>
   <body>
+    <style>
+      .navbar + .docs-section {
+        border-top-width: 0;
+        }
+      .navbar,
+      .navbar-spacer {
+        display: block;
+        width: 100%;
+        height: 6.5rem;
+        background: #fff;
+        z-index: 99;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee; }
+      .navbar-spacer {
+        display: none; }
+      .navbar > .container {
+        width: 100%;
+        }
+      .navbar-list {
+        list-style: none;
+        margin-bottom: 0;
+        }
+      .navbar-item {
+        position: relative;
+        float: left;
+        margin-bottom: 0;
+        }
+      .navbar-link {
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .2rem;
+        margin-right: 35px;
+        text-decoration: none;
+        line-height: 6.5rem;
+        color: #222; }
+      .navbar-link.active {
+        color: #33C3F0; }
+      .has-docked-nav .navbar {
+        position: fixed;
+        top: 0;
+        left: 0; }
+      .has-docked-nav .navbar-spacer {
+        display: block; }
+      /* Re-overiding the width 100% declaration to match size of % based container */
+      .has-docked-nav .navbar > .container {
+        width: 80%; }
+    </style>
     <div class="container">
         <div class="navbar-spacer"></div>
         <nav class="navbar">
-          <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/resume">Resume</a></li>
-            <li><a href="/technology">Technology</a></li>
-            <li><a href="/certifications">Certifications</a></li>
-            <li><a href="/calendar">Calendar</a></li>
-            <li><a href="/about-me">About Me</a></li>
+          <ul class="navbar-list">
+            <li class="navbar-item"><a class="navbar-link" href="/home">Home</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="/resume">Resume</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="/technology">Technology</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="/certifications">Certifications</a></li>
+            <li class="navbar-item"><a class="navbar-link" href="/calendar">Calendar</a></li>
           </ul>
         </nav>
     </div>
@@ -39,7 +82,11 @@ templ page_header(page string) {
 templ home_page(paragraph string) {
   @page_header("home page")
   <body>
-    <h1>Home Page</h1>
+    <div class="container">
+        <section class="header">
+            <h1 class="title">Home Page</h1>
+        </section>
+    </div>
     <p>{ paragraph }</p>
     <a href="https://github.com/mfaqiri"><img src="/static/images/github.svg" alt="GitHub" width="42" height="42"></img></a>
     <a href="mailto:mzfaqiri@gmail.com"><img src="/static/images/email.svg" alt="Email" width="42" height="42"></img></a>
@@ -62,6 +109,11 @@ templ resume_page() {
 templ certification_page() {
   @page_header("certifications page")
   <body>
+    <div class="container">
+        <section class="header">
+            <h1 class="title">Certifications</h1>
+        </section>
+    </div>
     <div
         data-iframe-width="150"
         data-iframe-height="270"
@@ -75,42 +127,35 @@ templ certification_page() {
   </body>
 }
 
-templ technology_page_dropdown(technologies []technology) {
-  @page_header("technology page")
-  <body>
-    <div>
-    <div>Technologies</div>
-    <div>
-      for i, tech := range technologies {
-        <a
-          hx-get={ string(templ.URL(fmt.Sprintf("/technology/%d", i))) }
-          hx-trigger="click"
-          hx-target="#tech-summary"
-          hx-swap="outerHTML"
-        >
-        { tech.Name }
-        </a>
-        }
+templ technology_page(technologies []technology) {
+    @page_header("technology page")
+    <body>
+    <div class="container">
+        <section class="header">
+            <h1 class="title">Technologies</h1>
+        </section>
     </div>
-    </div>
-  </body>
-}
-
-templ technology_page_summary(tech technology) {
-  <div id="tech-summary">
-    <h1>{ tech.Name }</h1>
-    <p>{ tech.Summary }</p>
-    <ul>
-    for _, t := range tech.BulletPoints {
-      <li>{ t }</li>
-    }
-    </ul>
-  </div>
-}
-
-templ technology_page(technologies []technology, techInd int) {
-  @technology_page_dropdown(technologies)
-  @technology_page_summary(technologies[techInd])
+      <div class="container">
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Summary</th>
+                    <th>My Usage</th>
+                </tr>
+            </thead>
+            <tbody>
+              for _, tech := range technologies {
+                <tr>
+                    <td>{ tech.Name }</td>
+                    <td>{ tech.Summary }</td>
+                    <td>{ tech.Usage }</td>
+                </tr>
+              }
+            </tbody>
+        </table>
+      </div>
+    </body>
 }
 
 
@@ -128,11 +173,3 @@ templ calendar_page() {
     </div>
   </body>
 }
-
-templ about_me_page() {
-  @page_header("about me page")
-  <body id="about-me">
-    <div>About Me</div>
-  </body>
-}
-
