@@ -61,11 +61,11 @@ var technologies = []technology {
   },
 }
 
-var home_page_paragraph = "Hello, Welcome to my website." +
+var home_page_paragraph = "Hello, welcome to my website." +
                           "The purpose of this site is to " +
-                          "present my development abilities" +
-                          "to those interested in contacting" +
-                          "me my email is linked below, as well" +
+                          "present my development abilities " +
+                          "to those interested in contacting " +
+                          "me my email is linked below, as well " +
                           "as my github."
 
 func main() {
@@ -79,27 +79,33 @@ func main() {
   r.Handle("/", templ.Handler(home_page(home_page_paragraph)))
   r.Handle("/home", templ.Handler(home_page(home_page_paragraph)))
   r.Handle("/resume", templ.Handler(resume_page()))
+  r.Handle("/certifications", templ.Handler(certification_page()))
   r.Handle("/technology", templ.Handler(technology_page(technologies, 0)))
   r.HandleFunc("/technology/{techInd}", func(w http.ResponseWriter, r *http.Request) {
     vars := mux.Vars(r)
     techInd,err := strconv.Atoi(vars["techInd"])
 
-    if err != nil { 
-      log.Fatal(err) 
+    if err != nil {
+      log.Fatal(err)
 
     }  else {
-      
+
         log.Print(technologies[techInd])
-      
+
         technology_page_summary(technologies[techInd]).Render(r.Context(), w)
 
       }
-      
+
   })
 
   r.Handle("/static/js/htmx.min.js", http.StripPrefix("/static",fs))
+  r.Handle("/static/css/skeleton.css", http.StripPrefix("/static",fs))
   r.Handle("/static/images/email.svg", http.StripPrefix("/static",fs))
   r.Handle("/static/images/github.svg", http.StripPrefix("/static",fs))
+  r.Handle("/static/images/apple-touch-icon.png", http.StripPrefix("/static",fs))
+  r.Handle("/static/images/favicon-32x32.png", http.StripPrefix("/static",fs))
+  r.Handle("/static/images/favicon-16x16.png", http.StripPrefix("/static",fs))
+  r.Handle("/static/images/site.webmanifest", http.StripPrefix("/static",fs))
 
   r.Handle("/calendar", templ.Handler(calendar_page()))
   r.Handle("/about-me", templ.Handler(about_me_page()))
@@ -111,9 +117,9 @@ func main() {
   }
 
   log.Println(fmt.Sprintf("Serving on localhost%s", port))
-  log.Fatal(http.ListenAndServeTLS(port, 
+  log.Fatal(http.ListenAndServeTLS(port,
                                 "https-certs/mzfaqiri.cert.pem",
-                                "https-certs/private.key.pem", 
+                                "https-certs/private.key.pem",
                                 r))
 }
 
