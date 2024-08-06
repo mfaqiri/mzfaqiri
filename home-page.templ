@@ -82,13 +82,22 @@ templ page_header(page string) {
 templ home_page(paragraph string) {
   @page_header("home page")
   <body>
+    <section class="header">
+        <h1 class="title">Home Page</h1>
+    </section>
     <div class="container">
-        <section class="header">
-            <h1 class="title">Home Page</h1>
-        </section>
+        <style>
+        .portrait {
+            width: 200px;
+            height: 300px;
+            object-fit: contain;
+        }
+        </style>
+        <img class="portrait" src="/static/images/professional_portrait.jpg"></img>
     </div>
     <p>{ paragraph }</p>
     <a href="https://github.com/mfaqiri"><img src="/static/images/github.svg" alt="GitHub" width="42" height="42"></img></a>
+    <a href="https://www.linkedin.com/in/mfaqiri"><img src="/static/images/linkedin.svg" alt="Linkedin" width="42" height="42"></img></a>
     <a href="mailto:mzfaqiri@gmail.com"><img src="/static/images/email.svg" alt="Email" width="42" height="42"></img></a>
   </body>
 }
@@ -109,11 +118,9 @@ templ resume_page() {
 templ certification_page() {
   @page_header("certifications page")
   <body>
-    <div class="container">
-        <section class="header">
-            <h1 class="title">Certifications</h1>
-        </section>
-    </div>
+    <section class="header">
+        <h1 class="title">Certifications</h1>
+    </section>
     <div
         data-iframe-width="150"
         data-iframe-height="270"
@@ -130,11 +137,9 @@ templ certification_page() {
 templ technology_page(technologies []technology) {
     @page_header("technology page")
     <body>
-    <div class="container">
-        <section class="header">
-            <h1 class="title">Technologies</h1>
-        </section>
-    </div>
+    <section class="header">
+        <h1 class="title">Technologies</h1>
+    </section>
       <div class="container">
         <table class="u-full-width">
             <thead>

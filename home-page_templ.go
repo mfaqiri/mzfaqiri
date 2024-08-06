@@ -69,20 +69,20 @@ func home_page(paragraph string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><div class=\"container\"><section class=\"header\"><h1 class=\"title\">Home Page</h1></section></div><p>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><section class=\"header\"><h1 class=\"title\">Home Page</h1></section><div class=\"container\"><style>\n        .portrait {\n            width: 200px;\n            height: 300px;\n            object-fit: contain;\n        }\n        </style><img class=\"portrait\" src=\"/static/images/professional_portrait.jpg\"></div><p>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(paragraph)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 90, Col: 18}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 98, Col: 18}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><a href=\"https://github.com/mfaqiri\"><img src=\"/static/images/github.svg\" alt=\"GitHub\" width=\"42\" height=\"42\"></a> <a href=\"mailto:mzfaqiri@gmail.com\"><img src=\"/static/images/email.svg\" alt=\"Email\" width=\"42\" height=\"42\"></a></body>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><a href=\"https://github.com/mfaqiri\"><img src=\"/static/images/github.svg\" alt=\"GitHub\" width=\"42\" height=\"42\"></a> <a href=\"https://www.linkedin.com/in/mfaqiri\"><img src=\"/static/images/linkedin.svg\" alt=\"Linkedin\" width=\"42\" height=\"42\"></a> <a href=\"mailto:mzfaqiri@gmail.com\"><img src=\"/static/images/email.svg\" alt=\"Email\" width=\"42\" height=\"42\"></a></body>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -142,7 +142,7 @@ func certification_page() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><div class=\"container\"><section class=\"header\"><h1 class=\"title\">Certifications</h1></section></div><div data-iframe-width=\"150\" data-iframe-height=\"270\" data-share-badge-id=\"667f4b7b-0481-44b3-bc56-189f759d02ee\" data-share-badge-host=\"https://www.credly.com\"></div><script type=\"text/javascript\" async src=\"//cdn.credly.com/assets/utilities/embed.js\">\n    </script></body>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><section class=\"header\"><h1 class=\"title\">Certifications</h1></section><div data-iframe-width=\"150\" data-iframe-height=\"270\" data-share-badge-id=\"667f4b7b-0481-44b3-bc56-189f759d02ee\" data-share-badge-host=\"https://www.credly.com\"></div><script type=\"text/javascript\" async src=\"//cdn.credly.com/assets/utilities/embed.js\">\n    </script></body>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -172,7 +172,7 @@ func technology_page(technologies []technology) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><div class=\"container\"><section class=\"header\"><h1 class=\"title\">Technologies</h1></section></div><div class=\"container\"><table class=\"u-full-width\"><thead><tr><th>Name</th><th>Summary</th><th>My Usage</th></tr></thead> <tbody>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body><section class=\"header\"><h1 class=\"title\">Technologies</h1></section><div class=\"container\"><table class=\"u-full-width\"><thead><tr><th>Name</th><th>Summary</th><th>My Usage</th></tr></thead> <tbody>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -184,7 +184,7 @@ func technology_page(technologies []technology) templ.Component {
 			var templ_7745c5c3_Var8 string
 			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(tech.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 150, Col: 35}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 155, Col: 35}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 			if templ_7745c5c3_Err != nil {
@@ -197,7 +197,7 @@ func technology_page(technologies []technology) templ.Component {
 			var templ_7745c5c3_Var9 string
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(tech.Summary)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 151, Col: 38}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 156, Col: 38}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
@@ -210,7 +210,7 @@ func technology_page(technologies []technology) templ.Component {
 			var templ_7745c5c3_Var10 string
 			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(tech.Usage)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 152, Col: 36}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `home-page.templ`, Line: 157, Col: 36}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {

@@ -56,11 +56,12 @@ var technologies = []technology {
 
 var home_page_paragraph = "Hello, my name is Mansoor Faqiri and I am a Full Stack Developer."+
                             " I am aiming to become an entry level CyberSecurity professional, I am CompTIA Security + certified,"+
-                            " proof of this is in the certifications tab, in the form of an embedded badge."+
+                            " proof of this is in the certifications tab in the form of an embedded badge."+
                             " Other than this certification I am also personally studying various cybersecurity concepts through HackTheBox."+
                             " If you are interested in my professional experience as a developer, you may check my resume tab for a downloadable PDF of my resume, with work experience."+
-                            " To see when I am available, you can check my calendar for my availability. To see how to message me, details are on my resume and below are links to my github and a mailto link to my email,"+
-                            " if you have an email provider configured to open such links e.g. Outlook, Thunderbird, etc."+
+                            " To see when I am available, you can check my calendar for my availability."+
+                            " To see how to message me details are on my resume and below are links to my github and a mailto link to my email,"+
+                            " which will automatically open an email to send to me if you have a program lik e.g. Outlook, Thunderbird, etc. installed"+
                             " Thank you for visiting my site"
 
 func main() {
@@ -80,10 +81,12 @@ func main() {
   r.Handle("/static/css/skeleton.css", http.StripPrefix("/static",fs))
   r.Handle("/static/images/email.svg", http.StripPrefix("/static",fs))
   r.Handle("/static/images/github.svg", http.StripPrefix("/static",fs))
+  r.Handle("/static/images/linkedin.svg", http.StripPrefix("/static",fs))
   r.Handle("/static/images/apple-touch-icon.png", http.StripPrefix("/static",fs))
   r.Handle("/static/images/favicon-32x32.png", http.StripPrefix("/static",fs))
   r.Handle("/static/images/favicon-16x16.png", http.StripPrefix("/static",fs))
   r.Handle("/static/images/site.webmanifest", http.StripPrefix("/static",fs))
+  r.Handle("/static/images/professional_portrait.jpg", http.StripPrefix("/static",fs))
 
   r.Handle("/calendar", templ.Handler(calendar_page()))
 
